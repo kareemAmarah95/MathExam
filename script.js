@@ -198,7 +198,7 @@ let scoreDiv = document.querySelector('#score'),
 
     function addLoserToLocalStorage(arrayOfLosers){
       let loserInput = document.querySelector("#loserName");
-      if(loserInput.value == "" || loserInput.value === null){
+      if(loserInput.value == "" || loserInput.value == null){
           document.querySelector("#submit").innerHTML = `Play Again`; 
         return
       } else {
