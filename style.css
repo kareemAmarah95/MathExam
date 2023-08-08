@@ -18,12 +18,13 @@ body{
 
 .box-one{
     width: 20%;
-    padding-right: 100px; 
+    padding: 15px; 
     margin-right: 20px;
 }
 
 .box-two{
-    width: 68%;
+    width: 73%;
+    margin: 0 auto;
 }
 
 #score{
@@ -93,13 +94,14 @@ body{
 }
 
 .row button#enter{
-    width: 100%;
     border: 2px solid rgba(4, 143, 143, 0.384);
     background: rgb(16, 158, 158);
     color: white;
     font-size: 15px;
     padding: 10px 15px;
     border-radius: 5px;
+    width: 30.5%;
+    margin: 0 auto;
 }
 
 table, tr{
@@ -144,4 +146,36 @@ tr:nth-child(even) {
     color: white;
     border-radius: 5px;
     cursor: pointer;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px){
+    .box-one {
+        width: auto;
+       padding: 10px 40px; 
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    .box-two{
+        width: 100%;
+    }
+
+    .row button#enter{
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
+    body{
+        overflow-x: scroll;
+    }
+    .box-one {
+        width: 90%;
+        padding-right: 18px;
+        padding-left: 15px;
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+    .box-two{
+        width: 100%;
+    }
 }
