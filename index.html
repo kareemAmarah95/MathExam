@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Exam</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="box-one">
+    <h1>Math Exam</h1>
+    <div class="removed-part">
+        <div id="score"></div>
+
+        <div id="equation"></div>
+        <div class="column">
+                <div class="row">
+                    <input id="enterNum" name="display" type="text" placeholder="Enter A Number">
+                </div>
+                <div class="row">
+                    <input type="button" value="1"></input>
+                    <input type="button" value="2"></input>
+                    <input type="button" value="3"></input>
+                </div>
+                <div class="row">
+                    <input type="button" value="4"></input>
+                    <input type="button" value="5"></input>
+                    <input type="button" value="6"></input>
+                    <input type="button" value="Infinity"></input>
+
+                </div>
+                <div class="row">
+                    <input type="button" value="7"></input>
+                    <input type="button" value="8"></input>
+                    <input type="button" value="9"></input>
+                    <input type="button" value="Invalid operation"></input>
+                </div>
+                <div class="row">
+                    <input type="button" value="clear" id="clear"></input>
+                    <input type="button" value="0"></input>
+                    <input type="button" value="-"></input>
+                    <input type="button" value="."></input>
+                </div>
+        </div>
+        <div class="row">
+            <button type="button"  id="enter">Enter</button>
+        </div>
+    </div>
+
+    </div>
+    <div class="box-two">
+        <h2>LeaderBoard</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="demo">
+
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
