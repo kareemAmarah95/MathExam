@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math Exam</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <div class="box-one">
@@ -26,23 +27,25 @@
                     <input type="button" value="4"></input>
                     <input type="button" value="5"></input>
                     <input type="button" value="6"></input>
-                    <input type="button" value="Infinity"></input>
+                    <!-- <input type="button" value="Infinity"></input> -->
 
                 </div>
                 <div class="row">
                     <input type="button" value="7"></input>
                     <input type="button" value="8"></input>
                     <input type="button" value="9"></input>
-                    <input type="button" value="Invalid operation"></input>
+                    <!-- <input type="button" value="Invalid operation"></input> -->
                 </div>
                 <div class="row">
-                    <input type="button" value="clear" id="clear"></input>
                     <input type="button" value="0"></input>
                     <input type="button" value="-"></input>
                     <input type="button" value="."></input>
                 </div>
         </div>
         <div class="row">
+            <input type="button" value="clear" id="clear"></input>
+            <button  id="delete" onclick="deleteOneNum()">
+            <i class="fa-solid fa-delete-left"></i></button>
             <button type="button"  id="enter">Enter</button>
         </div>
     </div>
@@ -63,6 +66,7 @@
             </tbody>
         </table>
     </div>
-    <script src="script.js"></script>
+    <script src="./js/all.min.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html>

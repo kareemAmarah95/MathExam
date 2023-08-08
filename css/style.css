@@ -40,6 +40,7 @@ body{
 .column{
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .row
@@ -100,8 +101,18 @@ body{
     font-size: 15px;
     padding: 10px 15px;
     border-radius: 5px;
-    width: 30.5%;
-    margin: 0 auto;
+    padding: 10px 24px;
+}
+
+.row button#delete{
+    border: 2px solid rgba(4, 143, 143, 0.384);
+    border-radius: 5px;
+    font-size: 15px;
+    background: rgb(16, 158, 158);
+    transition: 0.3s ease-in-out;
+    color: white;
+    text-transform: capitalize;
+    padding: 10px 35px;
 }
 
 table, tr{

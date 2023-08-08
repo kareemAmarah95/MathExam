@@ -2,14 +2,23 @@ let scoreDiv = document.querySelector('#score'),
  equation = document.querySelector('#equation'),
  enter = document.querySelector("#enter"),
  clearBtn = document.querySelector("#clear"),
- btns = document.querySelectorAll(".row input");
+ btns = document.querySelectorAll(".row input"),
+ deleteBtn = document.querySelector("#delete");
  console.log(btns);
  let inputBar = document.querySelector("#enterNum");
- let arrayOfLosers = [];
+ let arrayOfLosers = [],
+ counter = 0;
  
  getDataFromLocalStorage()
  if(window.localStorage.getItem("Loser")){
   arrayOfLosers = JSON.parse(window.localStorage.getItem("Loser"));
+}
+
+
+
+function deleteOneNum(){
+  inputBar.value = inputBar.value.toString().slice(0,-1);
+
 }
   
  minusBtn = document.querySelector("#minus");
@@ -42,23 +51,23 @@ let scoreDiv = document.querySelector('#score'),
         result = number1 + number2;
         break;
       case '-':
-        result = number1 - number2;
+        result = number1 -  number2;
         break;
       case '*':
         result = number1 * number2;
 
         break;
       case '/':
-        result = number1 / number2;
+        result = number1 /number2  ;
         break;
       case '%':
-        result = number1 % number2;
+        result = number1 % number2  ;
         break;
       default:
         console.log('Invalid operation');
-        return;
+        break;
     }
-    // console.log(result);
+    console.log(result);
     return result;
     
   }
@@ -76,7 +85,7 @@ let scoreDiv = document.querySelector('#score'),
     const operations = ['+', '-', '*', '/','%'];
     const randomOperation = operations[Math.floor(Math.random() * operations.length)];
     console.log(randomOperation);
-    result = performOperation(number1, number2, randomOperation);
+    result = performOperation( number1,number2,randomOperation);
     console.log(result);
     scoreDiv.innerHTML = `Score = 0`;
     equation.innerHTML = `${number1} ${randomOperation} ${number2} = ??`
@@ -91,14 +100,17 @@ let scoreDiv = document.querySelector('#score'),
     console.log(score);
     // scoreDiv.innerHTML = "";
     // equation.innerHTML = "";
-    console.log(`result = ${result}`);
+    // console.log(`total = ${total}`);
     console.log(`inputValue = ${inputBar.value}`);
-    if(inputBar.value == result ||inputBar.value === result.toFixed(2) || inputBar.value === result.toFixed(1)) {
+    if(inputBar.value == result || inputBar.value == result.toFixed(2) || inputBar.value == result.toFixed(1) || inputBar.value == result.toFixed(4)|| inputBar.value == result.toFixed(3)) {
       const number1 = generateRandomNumber(1, 10);
+      console.log(number1);
       const number2 = generateRandomNumber(1, 10);
+      console.log(number2);
       const operations = ['+', '-', '*', '/'];
       const randomOperation = operations[Math.floor(Math.random() * operations.length)];
-      result = performOperation(number1, number2, randomOperation) ;
+      console.log(randomOperation);
+      result = performOperation(number1,number2,randomOperation) ;
      
     console.log(number1);
     console.log(number2);
@@ -131,21 +143,21 @@ let scoreDiv = document.querySelector('#score'),
       const loser = {
         name: document.querySelector("#loserName").value,
         score: score,
-        rank: Date.now()
+        rank: counter+=1
       }
       arrayOfLosers.push(loser)
       console.log(arrayOfLosers);
       createTableForLosers(arrayOfLosers);
       window.localStorage.setItem("Loser", JSON.stringify(arrayOfLosers));
       // displayLosersOnPage(arrayOfLosers)
-      if(inputBar.value == result || inputBar.value === result.toFixed(1) || inputBar.value === result.toFixed(2)){
+      if(inputBar.value == result || inputBar.value === result.toFixed(1) || inputBar.value === result.toFixed(2)|| inputBar.value === result.toFixed(3) || inputBar.value === result.toFixed(4)){
         
       let number1 = generateRandomNumber(1, 10),
       number2 = generateRandomNumber(1, 10),
       operations = ['+', '-', '*', '/'],
       randomOperation = operations[Math.floor(Math.random() * operations.length)];
 
-      result = performOperation(number1, number2, randomOperation);
+      result = performOperation(number1,number2, randomOperation);
       
       document.querySelector("#loserName").value = "";
       
@@ -172,16 +184,18 @@ let scoreDiv = document.querySelector('#score'),
                     <input type="button" value="7" onclick="btnVal()"></input>
                     <input type="button" value="8" onclick="btnVal()"></input>
                     <input type="button" value="9" onclick="btnVal()"></input>
-                    <input type="button" value="Invalid operation" onclick="btnVal()"></input>
+                    
                 </div>
                 <div class="row">
-                    <input type="button" value="clear" id="clear" onclick="btnVal()"></input>
                     <input type="button" value="0" onclick="btnVal()"></input>
                     <input type="button" value="-" onclick="btnVal()"></input>
                     <input type="button" value="." onclick="btnVal()"></input>
                 </div>
         </div>
         <div class="row">
+            <input type="button" value="clear" id="clear" onclick="btnVal()"></input>
+            <button  id="delete" onclick="deleteOneNum()">
+            <i class="fa-solid fa-delete-left"></i></button>
             <input type="button" id="enter" onclick="btnVal();enterFunc()" value="Enter"></input>
         </div>
       `
@@ -198,14 +212,17 @@ let scoreDiv = document.querySelector('#score'),
 
     function addLoserToLocalStorage(arrayOfLosers){
       let loserInput = document.querySelector("#loserName");
-      if(loserInput.value == "" || loserInput.value == null){
-          document.querySelector("#submit").innerHTML = `Play Again`; 
-        return
-      } else {
-        // save the score and the name and the rank in the localStaorage
-      window.localStorage.setItem("Loser", JSON.stringify(arrayOfLosers));
-      document.querySelector("#loserName").value = "";
-      takeData();
+      if(loserInput.value.trim() != ""){
+           // save the score and the name and the rank in the localStaorage
+        window.localStorage.setItem("Loser", JSON.stringify(arrayOfLosers));
+        document.querySelector("#loserName").value = "";
+        takeData();
+      }
+       else {
+      
+
+      document.querySelector("#submit").innerHTML = `Play Again`; 
+      return
       }
       
       
