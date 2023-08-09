@@ -7,7 +7,7 @@ let scoreDiv = document.querySelector('#score'),
  console.log(btns);
  let inputBar = document.querySelector("#enterNum");
  let arrayOfLosers = [],
- counter = 0;
+  id = Math.random().toString(16).slice(2);
  
  getDataFromLocalStorage()
  if(window.localStorage.getItem("Loser")){
@@ -143,7 +143,7 @@ function deleteOneNum(){
       const loser = {
         name: document.querySelector("#loserName").value,
         score: score,
-        rank: counter+=1
+        rank: arrayOfLosers.length+1
       }
       arrayOfLosers.push(loser)
       console.log(arrayOfLosers);

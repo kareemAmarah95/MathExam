@@ -101,7 +101,7 @@ body{
     font-size: 15px;
     padding: 10px 15px;
     border-radius: 5px;
-    padding: 10px 24px;
+    padding: 11px 24px;
 }
 
 .row button#delete{
@@ -112,7 +112,7 @@ body{
     transition: 0.3s ease-in-out;
     color: white;
     text-transform: capitalize;
-    padding: 10px 35px;
+    padding: 11px 33px;
 }
 
 table, tr{
@@ -169,16 +169,20 @@ tr:nth-child(even) {
     .box-two{
         width: 100%;
     }
+    .row input#clear {
+        padding: 11px 0px;
+    }
 
     .row button#enter{
-        width: 70%;
+        padding: 11px 1px;
+    }
+
+    .row button#delete{
+        padding: 11px 12px;    
     }
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px){
-    body{
-        overflow-x: scroll;
-    }
     .box-one {
         width: 90%;
         padding-right: 18px;
@@ -188,5 +192,13 @@ tr:nth-child(even) {
     }
     .box-two{
         width: 100%;
+    }
+
+    .row button#enter{
+        padding: 11px 45px;
+    }
+
+    .row button#delete{
+        padding: 11px 55px;
     }
 }
