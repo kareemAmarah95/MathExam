@@ -248,8 +248,8 @@ function takeDataAndRefreshThePage(){
     }
 
     function refreshPage(){
-     window.location.reload();
-    // window.location.href = "../index.html";
+    //  window.location.reload();
+    window.location.href = "../index.html";
     }
     console.log(getDataFromLocalStorage(arrayOfLosers));
     // console.log(createTableForLosers());
