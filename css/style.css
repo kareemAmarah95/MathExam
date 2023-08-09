@@ -68,7 +68,6 @@ body{
     white-space: normal;
     text-align: center;
     padding: 11px 15px;
-    cursor: text;
     border-radius: 5px;
     border: none; 
     outline: none;
@@ -79,7 +78,7 @@ body{
     transition: 0.3s ease-in-out;
     color: white;
     text-transform: capitalize;
-    cursor: pointer;
+    cursor: pointer !important;
 
 }
 

@@ -184,8 +184,6 @@ function deleteOneNum(){
                     <input type="button" value="4" onclick="btnVal()"></input>
                     <input type="button" value="5" onclick="btnVal()"></input>
                     <input type="button" value="6" onclick="btnVal()"></input>
-                    <input type="button" value="Infinity" onclick="btnVal()"></input>
-
                 </div>
                 <div class="row">
                     <input type="button" value="7" onclick="btnVal()"></input>
@@ -249,7 +247,49 @@ function takeDataAndRefreshThePage(){
 
     function refreshPage(){
     //  window.location.reload();
-    window.location.href = "../index.html";
+    // window.location.href = "../index.html";
+    let number1 = generateRandomNumber(1, 10),
+    number2 = generateRandomNumber(1, 10),
+    operations = ['+', '-', '*', '/'],
+    randomOperation = operations[Math.floor(Math.random() * operations.length)];
+
+    result = performOperation(number1,number2, randomOperation);
+    document.querySelector(".removed-part").innerHTML = `
+    <div id="score">Score = ${score = 0}</div>
+    <div id="equation">${number1} ${randomOperation} ${number2} = ??</div>
+      <div class="column">
+              <div class="row">
+                  <input name="display" type="text" placeholder="Enter A Number">
+              </div>
+              <div class="row">
+                  <input type="button" value="1" onclick="btnVal()"></input>
+                  <input type="button" value="2" onclick="btnVal()"></input>
+                  <input type="button" value="3" onclick="btnVal()"></input>
+              </div>
+              <div class="row">
+                  <input type="button" value="4" onclick="btnVal()"></input>
+                  <input type="button" value="5" onclick="btnVal()"></input>
+                  <input type="button" value="6" onclick="btnVal()"></input>
+              </div>
+              <div class="row">
+                  <input type="button" value="7" onclick="btnVal()"></input>
+                  <input type="button" value="8" onclick="btnVal()"></input>
+                  <input type="button" value="9" onclick="btnVal()"></input>
+                  
+              </div>
+              <div class="row">
+                  <input type="button" value="0" onclick="btnVal()"></input>
+                  <input type="button" value="-" onclick="btnVal()"></input>
+                  <input type="button" value="." onclick="btnVal()"></input>
+              </div>
+      </div>
+      <div class="row">
+          <input type="button" value="clear" id="clear" onclick="btnVal()"></input>
+          <button  id="delete" onclick="deleteOneNum()">
+          <i class="fa-solid fa-delete-left"></i></button>
+          <input type="button" id="enter" onclick="btnVal();enterFunc()" value="Enter"></input>
+      </div>
+    `
     }
     console.log(getDataFromLocalStorage(arrayOfLosers));
     // console.log(createTableForLosers());
