@@ -145,10 +145,17 @@ function deleteOneNum(){
         score: score,
         rank: arrayOfLosers.length+1
       }
-      arrayOfLosers.push(loser)
+      arrayOfLosers.push(loser);
+     if(document.querySelector("#loserName").value != ""){
+          window.localStorage.setItem("Loser", JSON.stringify(arrayOfLosers));
+          createTableForLosers(arrayOfLosers);
+        } else {
+          refreshPage();
+          return;
+        }
+      
       console.log(arrayOfLosers);
-      createTableForLosers(arrayOfLosers);
-      window.localStorage.setItem("Loser", JSON.stringify(arrayOfLosers));
+     
       // displayLosersOnPage(arrayOfLosers)
       if(inputBar.value == result || inputBar.value === result.toFixed(1) || inputBar.value === result.toFixed(2)|| inputBar.value === result.toFixed(3) || inputBar.value === result.toFixed(4)){
         
@@ -204,32 +211,45 @@ function deleteOneNum(){
         document.querySelector(".removed-part").innerHTML = `
         <div id="score">Score = ${score}</div>
         <input id="loserName" placeholder="Enter Your Name"></input>
-        <button id="submit" onclick="addLoserToLocalStorage(arrayOfLosers);refreshPage()">Submit</button>
+        <button id="submit" onclick="takeDataAndRefreshThePage()">Submit</button>
       `
       } 
     }
-
+function takeDataAndRefreshThePage(){
+  setTimeout(()=>{
+    addLoserToLocalStorage(arrayOfLosers);
+  },200)
+  
+  setTimeout(()=>{
+    refreshPage();
+  },200)
+  
+}
 
     function addLoserToLocalStorage(arrayOfLosers){
-      let loserInput = document.querySelector("#loserName");
-      if(loserInput.value.trim() != ""){
-           // save the score and the name and the rank in the localStaorage
-        window.localStorage.setItem("Loser", JSON.stringify(arrayOfLosers));
-        document.querySelector("#loserName").value = "";
-        takeData();
-      }
-       else {
+      for(let i = 0 ; i < arrayOfLosers.length; i++){
+        if(arrayOfLosers[i] > 0){
+          let loserInput = document.querySelector("#loserName");
+          if(loserInput.value.trim() != ""){
+              // save the score and the name and the rank in the localStaorage
+            window.localStorage.setItem("Loser", JSON.stringify(arrayOfLosers));
+            document.querySelector("#loserName").value = "";
+            takeData();
+         }
+        } else {
       
 
-      document.querySelector("#submit").innerHTML = `Play Again`; 
-      return
-      }
+          document.querySelector("#submit").innerHTML = `Play Again`; 
+          return
+          }
+      } 
       
       
     }
 
     function refreshPage(){
-     window.location.reload();
+    //  window.location.reload();
+    window.location.href = "../index.html";
     }
     console.log(getDataFromLocalStorage(arrayOfLosers));
     // console.log(createTableForLosers());
