@@ -10,7 +10,7 @@ let scoreDiv = document.querySelector('#score'),
   id = Math.random().toString(16).slice(2);
  
  getDataFromLocalStorage()
- if(window.localStorage.getItem("Loser")){
+ if(window.localStorage.getItem("Loser") !== null){
   arrayOfLosers = JSON.parse(window.localStorage.getItem("Loser"));
 }
 
@@ -107,7 +107,7 @@ function deleteOneNum(){
       console.log(number1);
       const number2 = generateRandomNumber(1, 10);
       console.log(number2);
-      const operations = ['+', '-', '*', '/'];
+      const operations = ['+', '-', '*', '/','%'];
       const randomOperation = operations[Math.floor(Math.random() * operations.length)];
       console.log(randomOperation);
       result = performOperation(number1,number2,randomOperation) ;
@@ -161,7 +161,7 @@ function deleteOneNum(){
         
       let number1 = generateRandomNumber(1, 10),
       number2 = generateRandomNumber(1, 10),
-      operations = ['+', '-', '*', '/'],
+      operations = ['+', '-', '*', '/','%'],
       randomOperation = operations[Math.floor(Math.random() * operations.length)];
 
       result = performOperation(number1,number2, randomOperation);
@@ -214,35 +214,42 @@ function deleteOneNum(){
       } 
     }
 function takeDataAndRefreshThePage(){
-  setTimeout(()=>{
-    addLoserToLocalStorage(arrayOfLosers);
-  },200)
-  
-  setTimeout(()=>{
+  if(document.querySelector("#loserName").value != ""){
+    takeLoserData();
+      // console.log(arrayOfLosers);
+  } else {
     refreshPage();
-  },200)
+  }
+  // setTimeout(()=>{
+  //   addLoserToLocalStorage(arrayOfLosers);
+  // },200)
+  
+  // setTimeout(()=>{
+  //   refreshPage();
+  // },200)
   
 }
 
-    function addLoserToLocalStorage(arrayOfLosers){
-      for(let i = 0 ; i < arrayOfLosers.length; i++){
-        if(arrayOfLosers[i] > 0){
-          let loserInput = document.querySelector("#loserName");
-          if(loserInput.value.trim() != ""){
-              // save the score and the name and the rank in the localStaorage
-            window.localStorage.setItem("Loser", JSON.stringify(arrayOfLosers));
-            document.querySelector("#loserName").value = "";
-            takeData();
-         }
-        } else {
-      
+function takeLoserData(){
+  let loserObj = {
+    rank: arrayOfLosers.length+1,
+    score: score,
+    name: document.querySelector("#loserName").value,
+  }
+  arrayOfLosers.push(loserObj);
+  window.localStorage.getItem("Loser", JSON.stringify(arrayOfLosers));
+  document.querySelector("#loserName").value = "";
+  // refreshPage();
+  createTableForLosers(arrayOfLosers); 
+  }
 
-          document.querySelector("#submit").innerHTML = `Play Again`; 
-          return
-          }
-      } 
+    function addLoserToLocalStorage(){
       
-      
+      for (let i = 0; i < arrayOfLosers.length; i++) {
+        window.localStorage.setItem("Loser",JSON.stringify(arrayOfLosers));
+        createTableForLosers(arrayOfLosers); 
+      }
+    
     }
 
     function refreshPage(){
@@ -250,7 +257,7 @@ function takeDataAndRefreshThePage(){
     // window.location.href = "../index.html";
     let number1 = generateRandomNumber(1, 10),
     number2 = generateRandomNumber(1, 10),
-    operations = ['+', '-', '*', '/'],
+    operations = ['+', '-', '*', '/','%'],
     randomOperation = operations[Math.floor(Math.random() * operations.length)];
 
     result = performOperation(number1,number2, randomOperation);
@@ -284,10 +291,10 @@ function takeDataAndRefreshThePage(){
               </div>
       </div>
       <div class="row">
-          <input type="button" value="clear" id="clear" onclick="btnVal()"></input>
+          <button id="clear" onclick="clearAll()">Clear</button>
           <button  id="delete" onclick="deleteOneNum()">
           <i class="fa-solid fa-delete-left"></i></button>
-          <input type="button" id="enter" onclick="btnVal();enterFunc()" value="Enter"></input>
+          <input type="button" id="enter" onclick="enterFunc()" value="Enter"></input>
       </div>
     `
     }
@@ -298,69 +305,77 @@ function takeDataAndRefreshThePage(){
       createTableForLosers();
     }
 
-    // function createAnotherRandomQuestions(){
-    //   document.querySelector(".removed-part").innnerHTML = `
-    //   <div id="score">Score = ${score}</div>
-
-    //   <div id="equation"></div>
-    //   <div class="column">
-    //           <div class="row">
-    //               <input id="enterNum" name="display" type="text" placeholder="Enter A Number">
-    //           </div>
-    //           <div class="row">
-    //               <input type="button" value="1" onclick="btnVal()"></input>
-    //               <input type="button" value="2" onclick="btnVal()"></input>
-    //               <input type="button" value="3" onclick="btnVal()"></input>
-    //           </div>
-    //           <div class="row">
-    //               <input type="button" value="4" onclick="btnVal()"></input>
-    //               <input type="button" value="5" onclick="btnVal()"></input>
-    //               <input type="button" value="6" onclick="btnVal()"></input>
-    //               <input type="button" value="Infinity" onclick="btnVal()"></input>
-
-    //           </div>
-    //           <div class="row">
-    //               <input type="button" value="7" onclick="btnVal()"></input>
-    //               <input type="button" value="8" onclick="btnVal()"></input>
-    //               <input type="button" value="9" onclick="btnVal()"></input>
-    //               <input type="button" value="Invalid operation" onclick="btnVal()"></input>
-    //           </div>
-    //           <div class="row">
-    //               <input type="button" value="clear" id="clear" onclick="btnVal()"></input>
-    //               <input type="button" value="0" onclick="btnVal()"></input>
-    //               <input type="button" value="-" onclick="btnVal()"></input>
-    //               <input type="button" value="." onclick="btnVal()"></input>
-    //           </div>
-    //   </div>
-    //   <div class="row">
-    //     <input type="button" id="enter" onclick="btnVal();enterFunc()" value="Enter"></input>
-    //   </div>
-    //   `
-    // }
-
-    // function displayLosersOnPage(arrayOfLosers){
-    //   document.querySelector("#demo").innerHTML = ""; 
-    //   for (let i = 0; i < arrayOfLosers; i++) {
-    // return   document.querySelector("#demo").innerHTML += `
-    //     <tr>
-    //       <td>${arrayOfLosers[i].rank}</td>
-    //       <td>${arrayOfLosers[i].name}</td>
-    //       <td>${arrayOfLosers[i].score}</td>
-    //     </tr>
-    //    `
-        
-    //   }
-    // }
-
-
     function btnVal(){
-      let inputBar = document.querySelector("input[type=text]")
+      let inputBar = document.querySelector(".row input");
       inputBar.value += event.target.value;  
     }
 
     function enterFunc(){
-      generateRandomEquation();
+      let inputBar = document.querySelector(".row input");
+      console.log(`inputValue = ${inputBar.value}`);
+      console.log(`Result = ${result}`);
+      if(inputBar.value == result || inputBar.value === result.toFixed(2) || inputBar.value === result.toFixed(1) || inputBar.value === result.toFixed(3) || inputBar.value === result.toFixed(4)){
+       let number1 = generateRandomNumber(1, 10),
+    number2 = generateRandomNumber(1, 10),
+    operations = ['+', '-', '*', '/','%'],
+    randomOperation = operations[Math.floor(Math.random() * operations.length)];
+
+    result = performOperation(number1,number2, randomOperation);
+    document.querySelector(".removed-part").innerHTML = `
+    <div id="score">Score = ${score = 0}</div>
+    <div id="equation">${number1} ${randomOperation} ${number2} = ??</div>
+      <div class="column">
+              <div class="row">
+                  <input name="display" type="text" placeholder="Enter A Number">
+              </div>
+              <div class="row">
+                  <input type="button" value="1" onclick="btnVal()"></input>
+                  <input type="button" value="2" onclick="btnVal()"></input>
+                  <input type="button" value="3" onclick="btnVal()"></input>
+              </div>
+              <div class="row">
+                  <input type="button" value="4" onclick="btnVal()"></input>
+                  <input type="button" value="5" onclick="btnVal()"></input>
+                  <input type="button" value="6" onclick="btnVal()"></input>
+              </div>
+              <div class="row">
+                  <input type="button" value="7" onclick="btnVal()"></input>
+                  <input type="button" value="8" onclick="btnVal()"></input>
+                  <input type="button" value="9" onclick="btnVal()"></input>
+                  
+              </div>
+              <div class="row">
+                  <input type="button" value="0" onclick="btnVal()"></input>
+                  <input type="button" value="-" onclick="btnVal()"></input>
+                  <input type="button" value="." onclick="btnVal()"></input>
+              </div>
+      </div>
+      <div class="row">
+          <button id="clear" onclick="clearAll()">Clear</button>
+          <button  id="delete" onclick="deleteOneNum()">
+          <i class="fa-solid fa-delete-left"></i></button>
+          <input type="button" id="enter" onclick="enterFunc()" value="Enter"></input>
+      </div>
+    `
+    } else {
+        document.querySelector(".removed-part").innerHTML = `
+        <div id="score">Score = ${score}</div>
+        <input id="loserName" placeholder="Enter Your Name"></input>
+        <button id="submit" onclick="takeDataAndRefreshThePage()">Submit</button>
+      `
     }
+  }
+
+  function deleteOneNum(){
+    let inputBar = document.querySelector(".row input")
+    inputBar.value = inputBar.value.toString().slice(0,-1);
+
+}
+
+  function clearAll(){
+    let inputBar = document.querySelector(".row input[type=text]");
+     inputBar.value = "";
+  }
    
 
     function createTableForLosers(){
