@@ -216,6 +216,7 @@ function deleteOneNum(){
 function takeDataAndRefreshThePage(){
   if(document.querySelector("#loserName").value != ""){
     takeLoserData();
+    getDataFromLocalStorage()
       // console.log(arrayOfLosers);
   } else {
     refreshPage();
